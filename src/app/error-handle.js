@@ -13,15 +13,11 @@ const errorHandler = (error, ctx) => {
       message = '用户名已存在'
       break
     case errorTypes.USER_DOES_NOT_EXISTS:
-      status = 400 //参数错误
+      status = 403 //参数错误
       message = '用户名不存在'
       break
     case errorTypes.PASSWORD_IS_INCORRENT:
-      status = 400 //参数错误
-      message = '用户密码错误!'
-      break
-    case errorTypes.PASSWORD_IS_INCORRENT:
-      status = 400 //参数错误
+      status = 402 //参数错误
       message = '用户密码错误!'
       break
     case errorTypes.UNAUTHORIZATION:

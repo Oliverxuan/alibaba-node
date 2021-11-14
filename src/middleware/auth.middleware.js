@@ -4,10 +4,10 @@ const errorType = require('../constants/error-types')
 const service = require('../service/user.service')
 const md5password = require('../utils/password-handle')
 const { PUBLIC_KEY } = require('../app/config')
+const { getAvatarByUserId } = require('../service/file.service')
 
 //验证用户的输入合法性
 const verifyLogin = async (ctx, next) => {
-  console.log('test')
   //获取用户名密码
   const { name, password } = ctx.request.body
 
@@ -57,6 +57,7 @@ const verifyAuth = async (ctx, next) => {
 
     await next()
   } catch (err) {
+    console.log(err)
     const error = new Error(errorType.UNAUTHORIZATION)
     ctx.app.emit('error', error, ctx)
   }
