@@ -20,3 +20,4 @@ connections.getConnection((err, conn) => {
 })
 
 module.exports = connections.promise()
+

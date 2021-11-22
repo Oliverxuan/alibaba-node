@@ -6,7 +6,7 @@ class UserService {
     //获取传递的参数
     const { name, password } = user
     //sql语句
-    const statement = 'INSERT INTO users (name,password) VALUES (?,?);'
+    const statement = 'INSERT INTO users (name,password,honey,insect) VALUES (?,?,2,2);'
     //执行数据库操作
     const reslut = await connection.execute(statement, [name, password])
     //返回数据
@@ -31,7 +31,13 @@ class UserService {
 
   async updateAvatarUrlById(avatarUrl, id) {
     const statement = `UPDATE users SET avatar = ? WHERE id = ?;`
-    const [result] = await connection.execute(statement, [avatarUrl, id])
+    const [result] = await connection.execute(statement, [avatarUrl,id])
+    return result
+  }
+  async getText() {
+    const statement = `SELECT * FROM motto as t1 WHERE t1.id>=(RAND()*(SELECT MAX(id) FROM motto))LIMIT 1;
+`
+    const [result] = await connection.execute(statement, [])
     return result
   }
 }

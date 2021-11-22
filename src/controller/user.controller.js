@@ -14,14 +14,24 @@ class UserController {
 
     //返回数据
     console.log(user.name + '创建用户成功')
-    ctx.body = '用户创建成功'
+    await next()
   }
 
   async avatarInfo(ctx, next) {
     const { userId } = ctx.params
     const avatarInfo = await fileService.getAvatarByUserId(userId)
+    if (!avatarInfo) {
+      ctx.body = 'isAvatar'
+      return
+    }
     ctx.response.set('content-type', avatarInfo.mimetype)
     ctx.body = fs.createReadStream(`${AVATAR_PATH}/${avatarInfo.filename}`)
+  }
+
+  async text(ctx, next) {
+    const result = await userService.getText()
+    console.log
+    ctx.body = result[0]
   }
 }
 
